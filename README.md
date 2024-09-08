@@ -153,8 +153,9 @@ masters_union
 │   ├── api/                            # Каталог для API маршрутов
 │   │   ├── api_v1/                     # Каталог для маршрутов API версии 1
 │   │   │   ├── __init__.py             
-│   │   │   └── good.py                 # Эндпоинты для работы с товарами
+│   │   │   └── product.py              # Эндпоинты для работы с товарами
 │   │   ├── __init__.py                 
+│   │   ├── utils.py                    # Вспомоготельные сервисы для работы API
 │   │   └── validators.py               # Валидаторы для данных API
 │   ├── core/                           # Основные настройки и конфигурации
 │   │   ├── __init__.py                 
@@ -164,20 +165,21 @@ masters_union
 │   │   └── db.py                       # Базовая модель для SQLAlchemy
 │   ├── crud/                           # Операции CRUD
 │   │   ├── __init__.py                 
-│   │   ├── base.py                     # Базовые CRUD операции для СУБР
-│   │   └── good.py                     # CRUD операции для модели Good
-│   ├── media/                          # Каталог для медиафайлов
+│   │   ├── base.py                     # Базовые CRUD операции для СУБД
+│   │   └── product.py                  # CRUD операции для модели Product
 │   ├── models/                         # Модели для СУБД
 │   │   ├── __init__.py                 
-│   │   └── good.py                     # Модель Good для ДБ
+│   │   └── product.py                  # Модель Product для ДБ
 │   ├── schemas/                        # Pydantic схемы
 │   │   ├── __init__.py                 
-│   │   └── user.py                     # Схемы для модели Good
+│   │   └── product.py                  # Схемы для модели Product 
 │   ├── tests/                          # Тесты бэкенд приложения
-│   ├── utils/                          # Вспомоготельные сервисы
+│   ├── .dockerignore                   # 
 │   ├── .pre-commit-config.yaml         # Конфигурация для pre-commit hooks
 │   ├── __init__.py                     
 │   ├── alembic.ini                     # Файл конфигурации для Alembic
+│   ├── docker-entrypoint.bash          #
+│   ├── Dockerfile                      # 
 │   ├── main.py                         # Главная точка входа для запуска FastAPI приложения
 │   ├── pyproject.toml                  # Конфигурационный файл для black форматтера
 │   ├── requirements.txt                # Зависимости для backend
@@ -205,7 +207,9 @@ masters_union
 │   └── setup.cfg                       # Конфигурационный файл для setuptools
 │
 ├── infra/                              # Директория для инфраструктурных файлов
-│   └── env.example                     # Пример файла окружения
+│   ├── env.example                     # Пример файла окружения
+│   ├── docker-compose.yaml             # 
+│   └── nginx.conf                      # 
 │
 ├── .gitignore                          # Файл, определяющий, какие файлы и директории игнорировать в Git
 ├── README.md                           # Файл документации проекта
@@ -221,3 +225,28 @@ masters_union
     * Содержит файлы описывающие логику работы Telegram бота, влючая handlers, кнопки, и вспомогательные функции
 
 ## 2. Запуск приложения локально
+
+1. Создать `infra/.env` на основе `infra/.env.example` Указав валидные данные для подключения.
+
+      ```ini
+      # backend
+      APP_TITLE=Парсер WB  # Имя бекенд приложения по-умолчанию
+      APP_DESCRIPTION=Информация об остатках товаров с сайта wildberries.ru  # Описание бекенд приложения по-умолчанию
+
+      # Postgresql database
+      POSTGRES_USER=your_db_username  # Имя администратора БД
+      POSTGRES_PASSWORD=your_db_password  # Пароль администратора БД
+      POSTGRES_DB=wb_bears  # Имя БД 
+      POSTGRES_SERVER=db  # Имя хоста подключения к БД
+      POSTGRES_PORT=5432  # Номер порта подключения к БД
+      # Строка подключения к БД, формируемая из переменных описанных выше
+      DATABASE_URL=postgresql+asyncpg://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${POSTGRES_SERVER}:${POSTGRES_PORT}/${POSTGRES_DB}
+   
+      # bot
+      TELEGRAM_BOT_TOKEN='TELEGRAM_BOT_TOKEN'  # Токен Телеграм-бота
+      BASE_URL=http://backend:8000  # Адрес сервера, на котором расположен бекенд
+      BACKEND_API=api/v1/  # Путь к BASE_URL для доступа к API
+
+      ```
+2. Запустить `docker-compose up -d --build`.
+3. Сервер будет доступен по адресу `http://localhost:8000`

@@ -1,5 +1,3 @@
-from datetime import timedelta, timezone
-
 from pydantic_settings import BaseSettings
 
 
@@ -9,8 +7,6 @@ class Settings(BaseSettings):
     app_title: str
     app_description: str
     database_url: str
-    moscow_tz: timezone = timezone(timedelta(hours=3))
-    time_format: str
     telegram_bot_token: str
     backend_api: str
     base_url: str
@@ -20,7 +16,8 @@ class Settings(BaseSettings):
         extra = 'ignore'
 
     @property
-    def backend_api_url(self):
+    def backend_api_url(self) -> str:
+        """Сборка URL для API проекта"""
         return f'{self.base_url}{self.backend_api}'
 
 

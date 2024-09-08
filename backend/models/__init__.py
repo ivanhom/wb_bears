@@ -1,1 +1,1 @@
-from models.good import Good
+from models.product import Product
