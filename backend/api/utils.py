@@ -1,6 +1,7 @@
 import httpx
 
-from core.constants import HEADERS, MIN_PRICE, PRODUCT_URL
+from core.constants import HEADERS, PRODUCT_URL
+from schemas import ProductDB
 
 
 def get_photo_url(nm_id: int) -> str:  # noqa
@@ -72,12 +73,12 @@ async def get_response(nm_id: str) -> dict[str, dict]:
     return response.json()
 
 
-def parse_response(response: dict[str, dict]) -> dict[str, list]:
+def parse_response(response: dict[str, dict]) -> ProductDB:
     """Парсинг полученных данных из запроса."""
 
     product_data = response.get('data', {}).get('products')
     product_info = dict()
-    min_price = MIN_PRICE
+    min_price = None
     sizes_info = []
 
     if product_data and product_data is not None:
@@ -103,15 +104,17 @@ def parse_response(response: dict[str, dict]) -> dict[str, list]:
                     )
                     size_price = size.get('price', {}).get('total')
 
-                    if size_price < min_price:
+                    if min_price is None or size_price < min_price:
                         min_price = size_price
 
         product_info['nm_id'] = product_data[0].get('id')
-        product_info['current_price'] = int(min_price / 100)
+        product_info['current_price'] = (
+            int(min_price / 100) if min_price is not None else None
+        )
         product_info['sum_quantity'] = product_data[0].get('totalQuantity')
         product_info['quantity_by_sizes'] = sizes_info
         product_info['product_photo_url'] = get_photo_url(
             product_info.get('nm_id')
         )
 
-    return product_info
+    return ProductDB(**product_info)

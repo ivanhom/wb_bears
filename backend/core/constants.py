@@ -15,4 +15,3 @@ HEADERS = {
     'sec-ch-ua-mobile': '?0',
     'sec-ch-ua-platform': '"Windows"',
 }
-MIN_PRICE = 1_000_000_000

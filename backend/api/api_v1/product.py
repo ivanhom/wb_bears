@@ -4,6 +4,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from api.utils import get_response, parse_response
 from api.validators import check_product_exist
 from core.db import get_async_session
+from crud.product import product_crud
 from schemas import ProductDB
 
 router = APIRouter()
@@ -18,4 +19,5 @@ async def get_product(
     if not product_info:
         response = await get_response(nm_id)
         product_info = parse_response(response)
-    return ProductDB(**product_info)
+        await product_crud.create(product_info, session)
+    return product_info
