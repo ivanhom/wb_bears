@@ -192,6 +192,8 @@ wb_bears
 │   ├── __init__.py                     
 │   ├── config.py                       # Конфигурационные параметры для Телеграм-бота
 │   ├── constants.py                    # Константы для приложения
+│   ├── docker-entrypoint.bash          # Скрипт входной точки для Docker
+│   ├── Dockerfile                      # Файл описания образа Docker
 │   ├── main.py                         # Главная точка входа для запуска Телеграм-бота
 │   ├── pyproject.toml                  # Конфигурационный файл для black форматтера
 │   ├── requirements.txt                # Зависимости для bot

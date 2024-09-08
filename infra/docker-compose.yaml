@@ -9,6 +9,16 @@ services:
     depends_on:
       - db
 
+  bot:
+    env_file:
+      - path: .env
+        required: true
+    build:
+      context: ../bot
+      dockerfile: Dockerfile
+    depends_on:
+      - db
+
   db:
     env_file:
       - path: .env
