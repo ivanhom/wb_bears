@@ -146,7 +146,7 @@
 
 
 ```shell
-masters_union
+wb_bears
 │
 ├── backend/                            # Директория для бэкенда
 │   ├── alembic/                        # Каталог для файлов Allembic
@@ -174,12 +174,12 @@ masters_union
 │   │   ├── __init__.py                 
 │   │   └── product.py                  # Схемы для модели Product 
 │   ├── tests/                          # Тесты бэкенд приложения
-│   ├── .dockerignore                   # 
+│   ├── .dockerignore                   # Файл игнорирования Docker
 │   ├── .pre-commit-config.yaml         # Конфигурация для pre-commit hooks
 │   ├── __init__.py                     
 │   ├── alembic.ini                     # Файл конфигурации для Alembic
-│   ├── docker-entrypoint.bash          #
-│   ├── Dockerfile                      # 
+│   ├── docker-entrypoint.bash          # Скрипт входной точки для Docker
+│   ├── Dockerfile                      # Файл описания образа Docker
 │   ├── main.py                         # Главная точка входа для запуска FastAPI приложения
 │   ├── pyproject.toml                  # Конфигурационный файл для black форматтера
 │   ├── requirements.txt                # Зависимости для backend
@@ -208,8 +208,8 @@ masters_union
 │
 ├── infra/                              # Директория для инфраструктурных файлов
 │   ├── env.example                     # Пример файла окружения
-│   ├── docker-compose.yaml             # 
-│   └── nginx.conf                      # 
+│   ├── docker-compose.yaml             # Файл описания сервисов Docker Compose
+│   └── nginx.conf                      # Конфигурация веб-сервера Nginx
 │
 ├── .gitignore                          # Файл, определяющий, какие файлы и директории игнорировать в Git
 ├── README.md                           # Файл документации проекта
