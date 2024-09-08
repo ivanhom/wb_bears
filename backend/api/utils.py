@@ -1,6 +1,6 @@
 import httpx
 
-from core.constants import HEADERS, PRODUCT_URL
+from core.constants import HEADERS, NM_ID_TYPE_ERR, PRODUCT_URL
 from schemas import ProductDB
 
 
@@ -16,7 +16,7 @@ def get_photo_url(nm_id: int) -> str:  # noqa
     назначается номер сервера.
     """
     if type(nm_id) is not int:
-        raise TypeError('nm_id должен быть целым числом')
+        raise TypeError(NM_ID_TYPE_ERR)
 
     val = nm_id // 100_000
 
@@ -95,7 +95,10 @@ def parse_response(response: dict[str, dict]) -> ProductDB:
                         warehouse_id = warehouse.get('wh')
                         warehouse_quantity = warehouse.get('qty')
                         quantity_by_wh.append(
-                            {'wh': warehouse_id, 'qty': warehouse_quantity}
+                            {
+                                'wh': warehouse_id,
+                                'quantity': warehouse_quantity,
+                            }
                         )
 
                 if quantity_by_wh:

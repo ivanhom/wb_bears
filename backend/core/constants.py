@@ -15,3 +15,7 @@ HEADERS = {
     'sec-ch-ua-mobile': '?0',
     'sec-ch-ua-platform': '"Windows"',
 }
+NM_ID_TYPE_ERR = 'nm_id должен быть целым числом'
+PARSE_DATA_ERR = (
+    'Не удалось получить данные. Проверьте правильность введённого артикула'
+)
