@@ -184,6 +184,7 @@ wb_bears
 │   ├── main.py                         # Главная точка входа для запуска FastAPI приложения
 │   ├── pyproject.toml                  # Конфигурационный файл для black форматтера
 │   ├── requirements.txt                # Зависимости для backend
+│   ├── scheduled_tasks.py              # Планировщик задач
 │   └── setup.cfg                       # Конфигурационный файл для setuptools
 │
 ├── bot/                                # Директория для Телеграм-бота
@@ -228,6 +229,7 @@ wb_bears
       # backend
       APP_TITLE=Парсер WB  # Имя бекенд приложения по-умолчанию
       APP_DESCRIPTION=Информация об остатках товаров с сайта wildberries.ru  # Описание бекенд приложения по-умолчанию
+      DB_UPDATE_TIMER=5  # Таймер автообновления записей в БД. По умолчанию 5 мин.
 
       # Postgresql database
       POSTGRES_USER=your_db_username  # Имя администратора БД
