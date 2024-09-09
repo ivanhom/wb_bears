@@ -204,7 +204,8 @@ wb_bears
 │
 ├── infra/                              # Директория для инфраструктурных файлов
 │   ├── env.example                     # Пример файла окружения
-│   ├── docker-compose.yaml             # Файл описания сервисов Docker Compose
+│   ├── docker-compose.yml              # Файл описания сервисов Docker Compose
+│   ├── docker-compose.production.yml   # Файл описания сервисов Docker Compose для prod сервера
 │   └── nginx.conf                      # Конфигурация веб-сервера Nginx
 │
 ├── .gitignore                          # Файл, определяющий, какие файлы и директории игнорировать в Git
@@ -278,6 +279,5 @@ wb_bears
     • Alembic 1.13
 	• Aiogram 3.12
 	• Docker, docker-compose
-	• Celery
     • Redis 7
 	• Unittest, Pytest (опционально)
