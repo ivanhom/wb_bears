@@ -17,7 +17,7 @@ async def get_product(
     nm_id: str, session: AsyncSession = Depends(get_async_session)
 ) -> ProductDB:
     """Полученик информации о запрошенном с WB продукте по его nm_id."""
-    product_info = await check_product_exist(int(nm_id), session)
+    product_info = await check_product_exist(nm_id, session)
     if not product_info:
         try:
             response = await get_response(nm_id)
