@@ -186,7 +186,6 @@ wb_bears
 │   ├── schemas/                        # Pydantic схемы
 │   │   ├── __init__.py                 
 │   │   └── product.py                  # Схемы для модели Product 
-│   ├── tests/                          # Тесты бэкенд приложения
 │   ├── .dockerignore                   # Файл игнорирования Docker
 │   ├── .pre-commit-config.yaml         # Конфигурация для pre-commit hooks
 │   ├── __init__.py                     
@@ -200,7 +199,6 @@ wb_bears
 │   └── setup.cfg                       # Конфигурационный файл для setuptools
 │
 ├── bot/                                # Директория для Телеграм-бота
-│   ├── tests/                          # Тесты Телеграм-бота      
 │   ├── .dockerignore                   # Файл игнорирования Docker
 │   ├── .pre-commit-config.yaml         # Конфигурация для pre-commit hooks
 │   ├── __init__.py                     
