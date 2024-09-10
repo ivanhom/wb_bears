@@ -258,9 +258,21 @@ wb_bears
 2. Запустить `docker-compose up -d --build`.
 3. Сервер будет доступен по адресу `http://localhost:8000`
 
-### 2.2 Запуск приложения на удалённом сервере
+### 2.2 Cборка образов через CI/CD Github Actions
 
+Старт `.github/workflows/main.yml` происходит при `push` в ветку main.
 
+Следующие переменные определяют поведения сборки контейнеров и деплоя приложения на `pre-prod`:
+- `BACKEND_IMAGE_NAME` - имя образа бекенд приложения.
+- `BOT_IMAGE_NAME` - имя образа приложения бота.
+- `DOCKER_REPO` - имя репозитория на dockerHub.
+- `DOCKER_PASSWORD` - Пароль от аккакунта на dockerHub.
+- `DOCKER_USERNAME` - имя пользователя от аккаунта на dockerHub.
+- `DOCKER_DIRECTORY` - имя директории на удалённом сервере куда будет скопирован `docker-compose.production.yml` файл и где должен находиться актуальный `.env` файл.
+- `HOST` - адрес удаленного сервера.
+- `SSH_KEY` - приватный SSH ключ для подключения у кдаленному серверу.
+- `SSH_PASSPHRASE` - пароль SSH. Если используется
+- `USER` - имя пользователя на удалённом сервере.
 
 ## 3. Опробовать бот
 
@@ -268,8 +280,38 @@ wb_bears
 Для начала работы выполните команду `/start`
 При отправке боту артикула товара, в ответ будет получена собранная ботом информация об остатках товара на складах
 
+## 4. API приложения 
 
-## 4. Использованный стек технологий
+API доступен по ссылке: https://ivanhom.ddns.net/api/v1/products/{nm_id}
+
+API представляет из себя только один эндпоинт для GET запроса `GET products/{nm_id}`
+
+Для использования необходимо передать артикул товара в URL.
+Например, https://ivanhom.ddns.net/api/v1/products/225720401
+
+Ответ придёт в формате JSON в таком виде:
+
+```json
+{
+  "nm_id": 225720401,
+  "current_price": 27470,
+  "sum_quantity": 1,
+  "quantity_by_sizes": [
+    {
+      "size": "44-46",
+      "quantity_by_wh": [
+        {
+          "wh": 117986,
+          "quantity": 1
+        }
+      ]
+    }
+  ],
+  "product_photo_url": "https://basket-15.wbbasket.ru/vol2257/part225720/225720401/images/big/1.webp"
+}
+```
+
+## 5. Использованный стек технологий
 
 	• Python 3.11
 	• FastAPI 0.111
@@ -280,4 +322,3 @@ wb_bears
 	• Aiogram 3.12
 	• Docker, docker-compose
     • Redis 7
-	• Unittest, Pytest (опционально)

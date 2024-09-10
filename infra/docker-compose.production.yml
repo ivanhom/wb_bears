@@ -3,7 +3,7 @@ services:
     env_file:
       - path: .env
         required: true
-    image: ivanhom/wb_bears_backend
+    image: ${DOCKER_REPO}/${BACKEND_IMAGE_NAME}:latest
     restart: on-failure
     depends_on:
       - db
@@ -13,7 +13,7 @@ services:
     env_file:
       - path: .env
         required: true
-    image: ivanhom/wb_bears_bot
+    image: ${DOCKER_REPO}/${BOT_IMAGE_NAME}:latest
     restart: on-failure
     depends_on:
       - db
