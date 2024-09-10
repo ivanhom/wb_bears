@@ -84,6 +84,6 @@ jobs:
         passphrase: ${{ secrets.SSH_PASSPHRASE }}
         script: | 
           cd ${{ secrets.DOCKER_DIRECTORY }} 
-          sudo docker compose -f docker-compose.production.yml pull 
-          sudo docker compose -f docker-compose.production.yml down 
-          sudo docker compose -f docker-compose.production.yml up -d
+          echo ${{ secrets.USER_PASSWORD }} | sudo -S docker compose -f docker-compose.production.yml pull 
+          echo ${{ secrets.USER_PASSWORD }} | sudo -S docker compose -f docker-compose.production.yml down 
+          echo ${{ secrets.USER_PASSWORD }} | sudo -S docker compose -f docker-compose.production.yml up -d
