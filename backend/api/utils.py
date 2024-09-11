@@ -1,6 +1,6 @@
 import httpx
 
-from core.constants import HEADERS, NM_ID_TYPE_ERR, PRODUCT_URL
+from core.constants import NM_ID_TYPE_ERR, PRODUCT_URL
 from schemas import ProductDB
 
 
@@ -67,9 +67,7 @@ async def get_response(nm_id: str) -> dict[str, dict]:
     """Отправка запроса к WB."""
 
     async with httpx.AsyncClient() as client:
-        response = await client.get(
-            url=PRODUCT_URL.format(nm_id), headers=HEADERS
-        )
+        response = await client.get(url=PRODUCT_URL.format(nm_id))
     return response.json()
 
 
